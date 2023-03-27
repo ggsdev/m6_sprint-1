@@ -5,12 +5,12 @@ import {
 } from "../interfaces/contacts.interfaces";
 import { createContactService } from "../services/contacts/createContact.service";
 import { deleteContactService } from "../services/contacts/deleteContact.service";
-import { listAllContactsService } from "../services/contacts/listAllContactsservice";
+import { listAllContactsService } from "../services/contacts/listAllContacts.service";
 import { updateContactService } from "../services/contacts/updateContact.service";
 
 const createContactController = async (req: Request, res: Response) => {
   const dataContact: ICreateContactRequest = req.body;
-  const userId: string = req.user.id;
+  const userId: string = req.id;
   const contact = await createContactService(dataContact, userId);
   return res.status(201).json(contact);
 };
