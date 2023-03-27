@@ -24,7 +24,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 
 Diagrama ER da API definindo as relações entre as tabelas do banco de dados.
 
-![Diagrama ER](https://github.com/ggsdev/m6_sprint-1/blob/develop/diagram.png?raw=true)
+![Diagrama ER](https://github.com/ggsdev/m6_sprint-1/blob/main/backend/src/diagram.png?raw=true)
 
 ## 3. Rodando localmente
 
