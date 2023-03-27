@@ -6,9 +6,9 @@ export const validateUserPermissionsMiddlewere = async (
   res: Response,
   next: NextFunction
 ) => {
-  const userSession = req.user;
+  const userSession = req.id;
 
-  if (req.params.id !== userSession.id) {
+  if (req.params.id !== userSession) {
     throw new AppError("You are not able to do this action", 403);
   }
 
