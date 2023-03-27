@@ -16,5 +16,7 @@ export const userExistsMiddleware = async (
     return res.status(404).json({ message: "User not found." });
   }
 
+  req.user = userExists;
+
   next();
 };

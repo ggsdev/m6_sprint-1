@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../globalError";
 
-export const validateUserPermissionsMiddlewere = async (
+export const validateUserPermissionsMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction

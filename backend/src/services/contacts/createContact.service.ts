@@ -6,39 +6,28 @@ import { AppError } from "../../globalError";
 
 export const createContactService = async (
   dataContact: ICreateContactRequest,
-  userId: string
+  user: User
 ) => {
-  const usersRepository = AppDataSource.getRepository(User);
-
-  const findUser = await usersRepository.findOneBy({
-    id: userId,
-  });
-
   const contactsRepository = AppDataSource.getRepository(Contact);
 
-  const emailExists = await contactsRepository.findOneBy({
+  const contactExists = await contactsRepository.findOneBy({
     email: dataContact.email,
-  });
-
-  if (emailExists)
-    throw new AppError(
-      `Contact with: ${emailExists.email} email already exists.`
-    );
-
-  const numberExists = await contactsRepository.findOneBy({
     cellphone: dataContact.cellphone,
   });
 
-  if (numberExists)
+  if (contactExists) {
     throw new AppError(
-      `Contact with: ${numberExists.cellphone} number already exists.`
+      `Contact with email ${contactExists.email} or cellphone ${contactExists.cellphone} already exists.`
     );
+  }
 
-  const contact = contactsRepository.create({ ...dataContact, user: findUser });
+  const contact = contactsRepository.create({ ...dataContact, user });
   await contactsRepository.save(contact);
 
-  const { password, ...userWithoutPassword } = contact.user; //fix it
-  const { user, ...contactInfo } = contact;
+  const {
+    user: { password: _, ...userWithoutPassword },
+    ...contactInfo
+  } = contact;
 
   return { contact: contactInfo, user: userWithoutPassword };
 };

@@ -4,7 +4,10 @@ import { IDataUserResponse } from "../../interfaces/users.interfaces";
 
 const listAllUsersService = async (): Promise<IDataUserResponse[]> => {
   const usersRepository = AppDataSource.getRepository(User);
-  return await usersRepository.find({ relations: { contacts: true } });
+  return await usersRepository.find({
+    relations: { contacts: true },
+    withDeleted: true,
+  });
 };
 
 export default listAllUsersService;

@@ -1,10 +1,26 @@
 import AppDataSource from "../../data-source";
-import { Contact } from "../../entities/contact.entity";
-import { ICreateContactResponse } from "../../interfaces/contacts.interfaces";
+import { User } from "../../entities/user.entity";
+import { IContactResponse } from "../../interfaces/contacts.interfaces";
 
-export const listAllContactsService = async (): Promise<
-  ICreateContactResponse[]
-> => {
-  const contactsRepository = AppDataSource.getRepository(Contact);
-  return await contactsRepository.find({ relations: { user: true } });
+export const listAllContactsService = async (
+  userId: string
+): Promise<IContactResponse> => {
+  const contactsRepository = AppDataSource.getRepository(User);
+  const { password, name, email, id, contacts, ...userWithoutPassword } =
+    await contactsRepository.findOne({
+      where: { id: userId },
+      relations: { contacts: true },
+    });
+
+  const returnedData = {
+    user: {
+      user_id: id,
+      user_email: email,
+      user_name: name,
+      ...userWithoutPassword,
+    },
+    contacts,
+  };
+
+  return returnedData;
 };

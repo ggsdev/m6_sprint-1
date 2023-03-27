@@ -6,11 +6,10 @@ import {
 } from "../../interfaces/contacts.interfaces";
 
 export const updateContactService = async (
-  contactId: string,
+  contact: Contact,
   dataContact: IUpdateContactRequest
 ): Promise<IUpdateContactResponse> => {
   const contactsRepository = AppDataSource.getRepository(Contact);
-  const contact = await contactsRepository.findOneBy({ id: contactId });
 
   const updatedContact = { ...contact, ...dataContact };
 
