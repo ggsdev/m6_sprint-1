@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { Contact } from "../entities/contact.entity";
+import { User } from "../entities/user.entity";
 import {
   ICreateContactRequest,
   IUpdateContactRequest,
@@ -10,15 +12,15 @@ import { updateContactService } from "../services/contacts/updateContact.service
 
 const createContactController = async (req: Request, res: Response) => {
   const dataContact: ICreateContactRequest = req.body;
-  const userId: string = req.id;
-  const contact = await createContactService(dataContact, userId);
+  const user: User = req.user;
+  const contact = await createContactService(dataContact, user);
   return res.status(201).json(contact);
 };
 
 const updateContactController = async (req: Request, res: Response) => {
   const dataContact: IUpdateContactRequest = req.body;
-  const contactId: string = req.params.id;
-  const contact = await updateContactService(contactId, dataContact);
+  const contactInRequest: Contact = req.contact;
+  const contact = await updateContactService(contactInRequest, dataContact);
   return res.status(200).json(contact);
 };
 
@@ -29,7 +31,7 @@ const deleteContactController = async (req: Request, res: Response) => {
 };
 
 const getAllContactsController = async (req: Request, res: Response) => {
-  const contacts = await listAllContactsService();
+  const contacts = await listAllContactsService(req.params.id);
   return res.status(200).json(contacts);
 };
 

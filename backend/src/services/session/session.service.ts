@@ -31,7 +31,7 @@ const sessionService = async ({
     expiresIn: "24h",
   });
 
-  return { token: token };
+  return { token };
 };
 
 export default sessionService;
