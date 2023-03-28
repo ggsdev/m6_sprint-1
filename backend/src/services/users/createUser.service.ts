@@ -10,8 +10,10 @@ const createUserService = async (
   dataUser: IDataUserRequest
 ): Promise<IDataUserResponse> => {
   const usersRepository = AppDataSource.getRepository(User);
-  const findUser = await usersRepository.findOneBy({ email: dataUser.email });
-
+  const findUser = await usersRepository.findOne({
+    where: { email: dataUser.email },
+    withDeleted: true,
+  });
   if (findUser) {
     throw new AppError("Email already exists", 409);
   }
