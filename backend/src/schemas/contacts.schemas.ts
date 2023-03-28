@@ -8,17 +8,9 @@ import {
 const contactCreateSchema: SchemaOf<ICreateContactRequest> = yup
   .object()
   .shape({
-    fullName: yup.string().label("contact_name").required(),
+    fullName: yup.string().required(),
     email: yup.string().email().required(),
-    cellphone: yup.string().required(),
-  });
-
-const contactResponseSchema: SchemaOf<ICreateContactRequest> = yup
-  .object()
-  .shape({
-    fullName: yup.string(),
-    email: yup.string().email().label("contact_email"),
-    cellphone: yup.string().label("contact_phone"),
+    cellphone: yup.string().length(9).required(),
   });
 
 const contactUpdateSchema: SchemaOf<IUpdateContactRequest> = yup
@@ -26,7 +18,7 @@ const contactUpdateSchema: SchemaOf<IUpdateContactRequest> = yup
   .shape({
     fullName: yup.string(),
     email: yup.string().email(),
-    cellphone: yup.string(),
+    cellphone: yup.string().length(9),
   });
 
-export { contactCreateSchema, contactUpdateSchema, contactResponseSchema };
+export { contactCreateSchema, contactUpdateSchema };

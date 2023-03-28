@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { SchemaOf } from "yup";
 import {
   IDataUserRequest,
-  IDataUserResponse,
   IUpdateUserRequest,
 } from "../interfaces/users.interfaces";
 

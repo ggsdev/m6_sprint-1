@@ -1,7 +1,7 @@
 import { AnySchema } from "yup";
 import { Request, Response, NextFunction } from "express";
 
-const validatedBodyMiddleware =
+export const validatedBodyMiddleware =
   (schema: AnySchema) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,5 +15,3 @@ const validatedBodyMiddleware =
       res.status(400).json({ message: error.errors });
     }
   };
-
-export default validatedBodyMiddleware;

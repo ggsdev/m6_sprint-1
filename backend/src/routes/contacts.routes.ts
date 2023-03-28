@@ -1,14 +1,15 @@
 import { Router } from "express";
-import { authTokenMiddleware } from "../middlewares/authToken.middleware";
-import validatedBodyMiddleware from "../middlewares/validatedData.middleware";
 import {
   deleteContactController,
   updateContactController,
 } from "../controllers/contact.controller";
-import { contactExistsMiddleware } from "../middlewares/contactExists.middleware";
-import { contactUpdateSchema } from "../schemas/contacts.schemas";
-import { contactOwnerVerifyMiddleware } from "../middlewares/contactOwnerVerify.middleware";
-
+import {
+  authTokenMiddleware,
+  contactExistsMiddleware,
+  contactOwnerVerifyMiddleware,
+  validatedBodyMiddleware,
+} from "../middlewares/_index";
+import { contactUpdateSchema } from "../schemas/_index";
 const ContactRouter = Router();
 
 ContactRouter.patch(

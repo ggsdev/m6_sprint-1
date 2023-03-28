@@ -8,7 +8,7 @@ import {
 import { authTokenMiddleware } from "../middlewares/authToken.middleware";
 import { userExistsMiddleware } from "../middlewares/userExists.middleware";
 import { validateUserPermissionsMiddleware } from "../middlewares/validateUserPermissions.middleware";
-import validatedBodyMiddleware from "../middlewares/validatedData.middleware";
+import { validatedBodyMiddleware } from "../middlewares/validatedData.middleware";
 import { userRequestSchema, userUpdateSchema } from "../schemas/users.schemas";
 import {
   createContactController,

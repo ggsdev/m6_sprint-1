@@ -1,13 +1,12 @@
 import Router from "express";
 import { sessionController } from "../controllers/session.controllers";
-import validatedBodyMiddleware from "../middlewares/validatedData.middleware";
-// import { sessionSchema } from "../schemas/session/session.schemas";
-
+import { validatedBodyMiddleware } from "../middlewares/_index";
+import { sessionSchema } from "../schemas/_index";
 const sessionRouter = Router();
 
 sessionRouter.post(
   "",
-  // validatedBodyMiddleware(sessionSchema),
+  validatedBodyMiddleware(sessionSchema),
   sessionController
 );
 
